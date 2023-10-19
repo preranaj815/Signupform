@@ -1,0 +1,104 @@
+// pages/register.js
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+export default function Register() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleRegister = async () => {
+    // Perform user registration, add to the database
+    // Redirect to login page after successful registration
+    router.push('/login');
+  };
+
+  return (
+    <div>
+      <h1>Register</h1>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button onClick={handleRegister}>Register</button>
+    </div>
+  );
+}
+// pages/login.js
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    // Perform user authentication
+    // Redirect to subscription plans page after successful login
+    router.push('/subscription');
+  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+}
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+export default function Subscription() {
+  const [selectedPlan, setSelectedPlan] = useState('Basic');
+  const [billingInterval, setBillingInterval] = useState('monthly');
+  const router = useRouter();
+
+  const handleSubscribe = async () => {
+    // Handle subscription creation and payment through Stripe
+    // Save subscription details in the database
+    router.push('/subscription-details');
+  };
+
+  return (
+    <div>
+      <h1>Subscription Plans</h1>
+      <select
+        value={selectedPlan}
+        onChange={(e) => setSelectedPlan(e.target.value)}
+      >
+        <option value="Basic">Basic</option>
+        <option value="Premium">Premium</option>
+        <option value="Pro">Pro</option>
+      </select>
+      <select
+        value={billingInterval}
+        onChange={(e) => setBillingInterval(e.target.value)}
+      >
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
+      </select>
+      <button onClick={handleSubscribe}>Subscribe</button>
+    </div>
+  );
+}
